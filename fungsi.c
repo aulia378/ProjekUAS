@@ -57,6 +57,71 @@ void adminMenu(Alat *alat, int *jumlahAlat) {
     } while (choice != 4);
 }
 
+void tambahAlat(Alat *alat, int *jumlahAlat) {          
+    printf("\nMasukkan data alat baru:\n");
+
+    alat[*jumlahAlat].id = *jumlahAlat + 1; // karena utk menandakan bahwa id bertambah.
+
+    printf("Nama alat: ");
+    scanf("%s", alat[*jumlahAlat].nama);
+
+    printf("Merek alat: ");
+    scanf("%s", alat[*jumlahAlat].merek);
+
+    printf("Model alat: ");
+    scanf("%s", alat[*jumlahAlat].model);
+
+    printf("Tahun produksi: ");
+    scanf("%u", &alat[*jumlahAlat].tahunProduksi);
+
+    printf("Jumlah unit: ");
+    scanf("%u", &alat[*jumlahAlat].jumlahUnit);
+
+    alat[*jumlahAlat].jumlahTersedia = alat[*jumlahAlat].jumlahUnit;        
+
+    (*jumlahAlat)++;            //utk menandakan bahwa JumlahAlat dlm array telah bertambah 1 
+    SimpanAlat(alat, *jumlahAlat);
+    printf("Alat berhasil ditambahkan.\n");
+}
+
+// Simpan alat ke file
+void SimpanAlat(Alat *alat, int jumlahAlat) {
+    FILE *file = fopen("alat.txt", "w");
+    for (int i = 0; i < jumlahAlat; i++) {             
+        fprintf(file, "%u %s %s %s %u %u %u\n",
+                alat[i].id, alat[i].nama, alat[i].merek, alat[i].model,
+                alat[i].tahunProduksi, alat[i].jumlahUnit, alat[i].jumlahTersedia);
+    }
+    fclose(file);
+}
+
+// Fungsi untuk menghapus alat
+void hapusAlat(Alat *alat, int *jumlahAlat, int id) {
+    int found = 0;
+
+    // Mencari alat berdasarkan ID
+    for (int i = 0; i < *jumlahAlat; i++) {
+        if (alat[i].id == id) {
+            found = 1;
+
+            // Menggeser alat setelah alat yang akan dihapus
+            for (int j = i; j < *jumlahAlat - 1; j++) {
+                alat[j] = alat[j + 1];
+            }
+
+            // Mengurangi jumlah alat
+            (*jumlahAlat)--;
+
+            printf("Alat dengan ID %d berhasil dihapus.\n", id);
+            break;
+        }
+    }
+                                        
+    if (!found) {
+        printf("Alat dengan ID %d tidak ditemukan.\n", id);
+    }
+}
+
 // Fungsi untuk mengedit alat
 void editAlat(Alat *alat, int jumlahAlat, int id) {
     int found = 0;
