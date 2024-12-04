@@ -77,10 +77,10 @@ void tambahAlat(Alat *alat, int *jumlahAlat) {
     printf("Jumlah unit: ");
     scanf("%u", &alat[*jumlahAlat].jumlahUnit);
 
-    alat[*jumlahAlat].jumlahTersedia = alat[*jumlahAlat].jumlahUnit;        
+    alat[*jumlahAlat].jumlahTersedia = alat[*jumlahAlat].jumlahUnit;      // jumlahTersedia diatur sama dengan jumlahUnit, karena pada saat awal semua unit diasumsikan tersedia.  
 
-    (*jumlahAlat)++;            //utk menandakan bahwa JumlahAlat dlm array telah bertambah 1 
-    SimpanAlat(alat, *jumlahAlat);
+    (*jumlahAlat)++;            // menandakan bahwa satu alat baru telah ditambahkan ke array 
+    SimpanAlat(alat, *jumlahAlat);  // fungsi savealat untuk memperbahrui file alat.txt
     printf("Alat berhasil ditambahkan.\n");
 }
 
@@ -97,22 +97,22 @@ void SimpanAlat(Alat *alat, int jumlahAlat) {
 
 // Fungsi untuk menghapus alat
 void hapusAlat(Alat *alat, int *jumlahAlat, int id) {
-    int found = 0;
+    int found = 0; //menandakan alat belum ditemukan
 
     // Mencari alat berdasarkan ID
     for (int i = 0; i < *jumlahAlat; i++) {
         if (alat[i].id == id) {
             found = 1;
 
-            // Menggeser alat setelah alat yang akan dihapus
+             // Untuk menghapus alat tersebut, elemen array setelah alat yang dihapus digeser satu posisi ke kiri menggunakan loop
             for (int j = i; j < *jumlahAlat - 1; j++) {
                 alat[j] = alat[j + 1];
             }
 
-            // Mengurangi jumlah alat
+            // Variabel *jumlahAlat dikurangi 1 untuk mencerminkan bahwa jumlah alat telah berkurang.
             (*jumlahAlat)--;
 
-            printf("Alat dengan ID %d berhasil dihapus.\n", id);
+            printf("Alat dengan ID %d berhasil dihapus.\n", id); // Jika setelah iterasi alat dengan ID yang dimaksud tidak ditemukan (found tetap 0), maka fungsi mencetak pesan bahwa alat tidak ditemukan.
             break;
         }
     }
