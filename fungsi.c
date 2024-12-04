@@ -292,3 +292,17 @@ void SimpanPinjaman(Pinjaman *pinjaman, int jumlahPinjaman) {             //utk 
 
     fclose(file);
 }
+void kembalikanAlat(Pinjaman *pinjaman, int *jumlahPinjaman, char *username, int id) {      //fungsi utk mengembalikan alat
+    for (int i = 0; i < *jumlahPinjaman; i++) {
+        if (pinjaman[i].idAlat == id && strcmp(pinjaman[i].username, username) == 0) {
+            // Kembalikan alat
+            for (int j = i; j < *jumlahPinjaman - 1; j++) {
+                pinjaman[j] = pinjaman[j + 1];
+            }
+            (*jumlahPinjaman)--;
+            printf("Pengembalian alat berhasil.\n");
+            return;
+        }
+    }
+    printf("Peminjaman tidak ditemukan atau ID tidak cocok.\n");
+}
