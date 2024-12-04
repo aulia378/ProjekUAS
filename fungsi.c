@@ -240,3 +240,55 @@ void LihatAlat(Alat *alat, int jumlahAlat) {         //fungsi ini utk menampilka
         }
     }
 }
+
+void pinjamAlat(Alat *alat, int *jumlahAlat, Pinjaman *pinjaman, int *jumlahPinjaman, char *username, int id) {
+    // Periksa apakah alat dengan ID tersebut tersedia
+    for (int i = 0; i < *jumlahAlat; i++) {             //
+        if (alat[i].id == id) {                 //
+            if (alat[i].jumlahTersedia > 0) {           //Memeriksa apakah ID alat yang ada pada array alat sesuai dengan ID yang diberikan (parameter id).
+                // Kurangi jumlah tersedia
+                alat[i].jumlahTersedia--; //karena dipinjam maka jumlahtersedia akan dikurangi
+
+                // Tambahkan ke daftar pinjaman
+                pinjaman[*jumlahPinjaman].idAlat = id;
+                strcpy(pinjaman[*jumlahPinjaman].username, username);
+                (*jumlahPinjaman)++;        //maka pinjaman akan bertambah
+
+                printf("Peminjaman berhasil.\n");
+                SimpanPinjaman(pinjaman, *jumlahPinjaman); // Simpan data pinjaman
+                return;
+            } else {                    //jika jumlahtersedia != jumlahunit maka else akan berjalan
+                printf("Alat tidak tersedia untuk dipinjam.\n");
+                return;
+            }
+        }
+    }
+    printf("Alat dengan ID %d tidak ditemukan.\n", id);
+}
+// Memuat data pinjaman
+void DataPinjaman(Pinjaman *pinjaman, int *jumlahPinjaman) {
+    FILE *file = fopen("pinjaman.txt", "r");        //membuka file pinjaman.txt
+    if (file == NULL) {
+        printf("Gagal membuka file untuk membaca.\n");
+        return;
+    }
+
+    while (fscanf(file, "%d %s", &pinjaman[*jumlahPinjaman].idAlat, pinjaman[*jumlahPinjaman].username) != EOF) {
+        (*jumlahPinjaman)++;         //kalo ada akan di tambahkan
+    }
+
+    fclose(file);
+}
+void SimpanPinjaman(Pinjaman *pinjaman, int jumlahPinjaman) {             //utk menyimpan alat yg dipinjam ke dlm file pinjaman.txt
+    FILE *file = fopen("pinjaman.txt", "w");
+    if (file == NULL) {
+        printf("Gagal membuka file untuk menulis.\n");
+        return;
+    }
+
+    for (int i = 0; i < jumlahPinjaman; i++) {                           //Jumlah Pinjaman akan bertambah di dalam file   
+        fprintf(file, "%d %s\n", pinjaman[i].idAlat, pinjaman[i].username);
+    }
+
+    fclose(file);
+}
