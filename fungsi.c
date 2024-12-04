@@ -191,3 +191,52 @@ void lihatPinjaman(Alat *alat, int jumlahAlat, Pinjaman *pinjaman, int jumlahPin
     if (!found) {
         printf("Tidak ada pinjaman yang ditemukan untuk pengguna %s.\n", username);
     }
+void MuatAkun(Akun *akun, int *jumlahAkun) {            //membaca data akun dari sebuah file, kemudian disimpan dalam array struct Akun.
+    FILE *file = fopen("akun.txt", "r");        
+    if (!file) {
+        printf("File akun.txt tidak ditemukan.\n");
+        exit(1);
+    }
+    *jumlahAkun = 0;            //jumlah akun utk menghitung jumlah akun yg berhasil dibaca
+    while (fscanf(file, "%s %s %s", akun[*jumlahAkun].username, akun[*jumlahAkun].password, akun[*jumlahAkun].role) != EOF) {
+        (*jumlahAkun)++;                    
+    }
+    fclose(file);
+}
+
+void MuatAlat(Alat *alat, int *jumlahAlat) {        //utk membaca data ttg alat dari file alat.txt kemudian disimpan dlm array struck Alat.
+    FILE *file = fopen("alat.txt", "r");
+    if (!file) {
+        printf("File alat.txt tidak ditemukan.\n");
+        exit(1);
+    }
+    *jumlahAlat = 0;            //nilai ini utk dihitung jumlah alat yg berhasil dari alat.txt.
+    
+    // Membaca setiap baris alat dari file
+    while (fscanf(file, "%u %s %s %s %u %u %u", 
+                   &alat[*jumlahAlat].id, 
+                   alat[*jumlahAlat].nama, 
+                   alat[*jumlahAlat].merek, 
+                   alat[*jumlahAlat].model,
+                   &alat[*jumlahAlat].tahunProduksi, 
+                   &alat[*jumlahAlat].jumlahUnit, 
+                   &alat[*jumlahAlat].jumlahTersedia) != EOF) {
+        (*jumlahAlat)++;        //setiap berhasil dibaca 1 baris nilai 1 alat disimpan 1 data ke dlm array JumlahAlat.
+    }
+    fclose(file);
+    if (*jumlahAlat == 0) {         
+        printf("Tidak ada alat yang ditemukan dalam file alat.txt.\n");
+    }
+}
+void LihatAlat(Alat *alat, int jumlahAlat) {         //fungsi ini utk menampilkan alat yg telah dibaca dari file dan disimpan dlm array struct Alat.
+    printf("\nDaftar Alat Laboratorium:\n");
+    if (jumlahAlat == 0) {
+        printf("Tidak ada alat yang tersedia.\n");
+    } else {
+        for (int i = 0; i < jumlahAlat; i++) {                  //Menampilkan daftar alat
+            printf("ID: %u, Nama: %s, Merek: %s, Model: %s, Tahun: %u, Tersedia: %u\n",
+                   alat[i].id, alat[i].nama, alat[i].merek, alat[i].model,
+                   alat[i].tahunProduksi, alat[i].jumlahTersedia);
+        }
+    }
+}
