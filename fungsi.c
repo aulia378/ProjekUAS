@@ -306,23 +306,25 @@ void LihatAlat(Alat *alat, int jumlahAlat) {         //fungsi ini utk menampilka
     }
 }
 
+// Fungsi untuk pinjam alat
 void pinjamAlat(Alat *alat, int *jumlahAlat, Pinjaman *pinjaman, int *jumlahPinjaman, char *username, int id) {
     // Periksa apakah alat dengan ID tersebut tersedia
-    for (int i = 0; i < *jumlahAlat; i++) {             //
-        if (alat[i].id == id) {                 //
-            if (alat[i].jumlahTersedia > 0) {           //Memeriksa apakah ID alat yang ada pada array alat sesuai dengan ID yang diberikan (parameter id).
+    for (int i = 0; i < *jumlahAlat; i++) {             
+        if (alat[i].id == id) {    // Memeriksa apakah ID alat yang ada pada array alat sesuai dengan ID yang diberikan (parameter id)             
+            if (alat[i].jumlahTersedia > 0) {   
+                
                 // Kurangi jumlah tersedia
-                alat[i].jumlahTersedia--; //karena dipinjam maka jumlahtersedia akan dikurangi
+                alat[i].jumlahTersedia--;   // Karena dipinjam maka jumlahtersedia akan dikurangi
 
                 // Tambahkan ke daftar pinjaman
                 pinjaman[*jumlahPinjaman].idAlat = id;
                 strcpy(pinjaman[*jumlahPinjaman].username, username);
-                (*jumlahPinjaman)++;        //maka pinjaman akan bertambah
+                (*jumlahPinjaman)++;        // Maka pinjaman akan bertambah
 
                 printf("Peminjaman berhasil.\n");
-                SimpanPinjaman(pinjaman, *jumlahPinjaman); // Simpan data pinjaman
+                SimpanPinjaman(pinjaman, *jumlahPinjaman);  // Simpan data pinjaman
                 return;
-            } else {                    //jika jumlahtersedia != jumlahunit maka else akan berjalan
+            } else {                 // Jika jumlahtersedia tidak sama dengan jumlahunit maka else akan berjalan
                 printf("Alat tidak tersedia untuk dipinjam.\n");
                 return;
             }
@@ -330,34 +332,39 @@ void pinjamAlat(Alat *alat, int *jumlahAlat, Pinjaman *pinjaman, int *jumlahPinj
     }
     printf("Alat dengan ID %d tidak ditemukan.\n", id);
 }
-// Memuat data pinjaman
+
+//  Fungsi yang memuat data pinjaman
 void DataPinjaman(Pinjaman *pinjaman, int *jumlahPinjaman) {
-    FILE *file = fopen("pinjaman.txt", "r");        //membuka file pinjaman.txt
+    FILE *file = fopen("pinjaman.txt", "r");        // Membuka file pinjaman.txt dengan mode 'r'
     if (file == NULL) {
         printf("Gagal membuka file untuk membaca.\n");
         return;
     }
 
     while (fscanf(file, "%d %s", &pinjaman[*jumlahPinjaman].idAlat, pinjaman[*jumlahPinjaman].username) != EOF) {
-        (*jumlahPinjaman)++;         //kalo ada akan di tambahkan
+        (*jumlahPinjaman)++;         // Jika ada akan di tambahkan
     }
 
     fclose(file);
 }
-void SimpanPinjaman(Pinjaman *pinjaman, int jumlahPinjaman) {             //utk menyimpan alat yg dipinjam ke dlm file pinjaman.txt
-    FILE *file = fopen("pinjaman.txt", "w");
+
+// Fungsi untuk menyimpan alat yg dipinjam ke dalam file pinjaman.txt
+void SimpanPinjaman(Pinjaman *pinjaman, int jumlahPinjaman) {             
+    FILE *file = fopen("pinjaman.txt", "w");   // Membuka file pinjaman.txt dengan mode 'w'
     if (file == NULL) {
         printf("Gagal membuka file untuk menulis.\n");
         return;
     }
 
-    for (int i = 0; i < jumlahPinjaman; i++) {                           //Jumlah Pinjaman akan bertambah di dalam file   
+    for (int i = 0; i < jumlahPinjaman; i++) {          // Jumlah Pinjaman akan bertambah di dalam file   
         fprintf(file, "%d %s\n", pinjaman[i].idAlat, pinjaman[i].username);
     }
 
     fclose(file);
 }
-void kembalikanAlat(Pinjaman *pinjaman, int *jumlahPinjaman, char *username, int id) {      //fungsi utk mengembalikan alat
+
+// Fungsi untuk mengembalikan alat
+void kembalikanAlat(Pinjaman *pinjaman, int *jumlahPinjaman, char *username, int id) {      
     for (int i = 0; i < *jumlahPinjaman; i++) {
         if (pinjaman[i].idAlat == id && strcmp(pinjaman[i].username, username) == 0) {
             // Kembalikan alat
