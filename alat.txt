@@ -1,3 +1,7 @@
-1 Mikroskop Krox MX2000 2020 5 5
-2 Spektrofometer Adibas SP300 2019 3 3
-3 Incubator Aipon IC400 2021 5 5
+1 Mikroskop Olympus CX23LED 2005 2 2
+2 Spektrofometer IWAKI SP300 2019 3 3
+3 Inkubator DLAB IC400 2021 5 5
+4 PhMeter Ohaus UV1280 1993 4 4
+5 Sentrifuge Hettich EBA200 2015 2 2
+6 HotPlate ThermoScientific SP88887 2018 8 8
+7 Mikropipet Gilson SY-26LH 2009 9 9
