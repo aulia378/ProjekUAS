@@ -112,7 +112,7 @@ void hapusAlat(Alat *alat, int *jumlahAlat, int id) {
             // Variabel *jumlahAlat dikurangi 1 untuk mencerminkan bahwa jumlah alat telah berkurang.
             (*jumlahAlat)--;
 
-            printf("Alat dengan ID %d berhasil dihapus.\n", id); // Jika setelah iterasi alat dengan ID yang dimaksud tidak ditemukan (found tetap 0), maka fungsi mencetak pesan bahwa alat tidak ditemukan.
+            printf("Alat dengan ID %d berhasil dihapus.\n",id); // Jika setelah iterasi alat dengan ID yang dimaksud tidak ditemukan (found tetap 0), maka fungsi mencetak pesan bahwa alat tidak ditemukan.
             break;
         }
     }
