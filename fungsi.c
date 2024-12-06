@@ -129,16 +129,16 @@ void editAlat(Alat *alat, int jumlahAlat, int id) {
     // Mencari alat berdasarkan ID
     for (int i = 0; i < jumlahAlat; i++) {
         if (alat[i].id == id) {
-            found = 1;
+            found = 1; // Id alat yang ingin diedit ditemukan
 
-            // Menampilkan informasi alat yang akan diedit
             printf("Alat ditemukan: \n");
+            //Menampilkan informasi alat yang akan diedit
             printf("ID: %u, Nama: %s, Merek: %s, Model: %s, Tahun: %u, Tersedia: %u\n",
                    alat[i].id, alat[i].nama, alat[i].merek, alat[i].model,
                    alat[i].tahunProduksi, alat[i].jumlahTersedia);
 
-            // Memberikan pilihan untuk mengedit nama, merek, model, atau jumlah
-            int choice;
+            int choice; // Menyimpan pilihan dari admin
+            //Menampilkan menu pilihan kepada admin
             printf("Pilih data yang ingin diedit:\n");
             printf("1. Nama Alat\n");
             printf("2. Merek Alat\n");
@@ -183,15 +183,16 @@ void editAlat(Alat *alat, int jumlahAlat, int id) {
             break;
         }
     }
-    if (!found) {
+    if (!found) { // Id alat yang ingin diedit tidak ditemukan
         printf("Alat dengan ID %d tidak ditemukan.\n", id);
     }
     
 }
+//Fungsi untuk menampilkan pilihan menu untuk user
 void userMenu(Alat *alat, int jumlahAlat, Pinjaman *pinjaman, int *jumlahPinjaman, char *username) {
     int choice, id;
     
-    do {
+    do { // Tampilkan menu user
         printf("\nMenu User:\n");
         printf("1. Lihat Alat\n");
         printf("2. Pinjam Alat\n");
@@ -214,6 +215,7 @@ void userMenu(Alat *alat, int jumlahAlat, Pinjaman *pinjaman, int *jumlahPinjama
                 break;
 
             case 3:
+                //Menampilkan daftar pinjaman
                 lihatPinjaman(alat, jumlahAlat, pinjaman, *jumlahPinjaman, username);
                 break;
 
@@ -230,20 +232,21 @@ void userMenu(Alat *alat, int jumlahAlat, Pinjaman *pinjaman, int *jumlahPinjama
             default:
                 printf("Pilihan tidak valid. Silakan coba lagi.\n");
         }
-    } while (choice != 5);          //jika bukan user 1-5 maka user akan disuruh memilih ulang. 
+    } while (choice != 5); // Loop berhenti ketika choise = 5 
 }
-
+// Fungsi untuk menampilkan riwayat pinjaman dari user
 void lihatPinjaman(Alat *alat, int jumlahAlat, Pinjaman *pinjaman, int jumlahPinjaman, char *username) {
     printf("\nDaftar Pinjaman untuk pengguna %s:\n", username);
     int found = 0;      //Variabel found digunakan untuk melacak apakah pinjaman ditemukan untuk pengguna.
 
-    for (int i = 0; i < jumlahPinjaman; i++) {              //Loop ini digunakan untuk memeriksa setiap entri dalam array pinjaman.
+    for (int i = 0; i < jumlahPinjaman; i++) {              //Memeriksa data pinjaman
         if (strcmp(pinjaman[i].username, username) == 0) {   //membandingkan 2 string, jika cocok berarti pinjaman milik si user
-            found = 1;
+            found = 1; //Data pinjaman utk user ditemukan
 
             // Mencari alat berdasarkan ID
-            for (int j = 0; j < jumlahAlat; j++) {      //Loop ini mencari alat di array alat dengan ID yang sama seperti idAlat dalam data pinjaman.
-                if (alat[j].id == pinjaman[i].idAlat) {
+            for (int j = 0; j < jumlahAlat; j++) { 
+                if (alat[j].id == pinjaman[i].idAlat) { // Jika id alat yang diperiksa sama dengan id alat yg dicari
+                    // Mencetak informasi tentang detail alat yang dipinjam
                     printf("ID: %u, Nama: %s, Merek: %s, Model: %s, Tahun: %u, Tersedia: %u\n",
                            alat[j].id, alat[j].nama, alat[j].merek, alat[j].model,
                            alat[j].tahunProduksi, alat[j].jumlahTersedia);
@@ -253,9 +256,10 @@ void lihatPinjaman(Alat *alat, int jumlahAlat, Pinjaman *pinjaman, int jumlahPin
         }
     }
 
-    if (!found) {
+    if (!found) { 
         printf("Tidak ada pinjaman yang ditemukan untuk pengguna %s.\n", username);
     }
+}
 void MuatAkun(Akun *akun, int *jumlahAkun) {            //membaca data akun dari sebuah file, kemudian disimpan dalam array struct Akun.
     FILE *file = fopen("akun.txt", "r");        
     if (!file) {
