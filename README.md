@@ -3,12 +3,12 @@ ProjekUas Praktikum Pemrograman
 
 Kelompok 5
 Anggota:
-1.Muhammad Isra' Aulia_2408107010006
-2.Syakila Naira_2408107010034
+1. Muhammad Isra' Aulia_2408107010006
+2. Syakila Naira_2408107010034
 3. Annisa Haura Dhiya_2408107010030
 4. Rahmatul Uliya_2408107010012
 5. Naila Hafizha_2408107010026
-6.Jazil Nazvi Khalilullah_2408107010113
+6. Jazil Nazvi Khalilullah_2408107010113
 
 -> Cara Kerja pada Header.H
 
@@ -147,7 +147,149 @@ Jika tidak ditemukan:
 Tampilkan pesan alat tidak ditemukan.
 Fungsi ini bekerja langsung pada array yang diberikan (menggunakan pointer) sehingga mengubah data asli tanpa perlu mengembalikan nilai
 
+-> cara kerja fungsi edit alat
+1. Mencari Alat
+Variabel found: Variabel ini digunakan sebagai  untuk menandai apakah alat yang ingin diedit sudah ditemukan atau belum. Awalnya, nilai found diinisialisasi menjadi 0 (belum ditemukan).
+Loop for: Loop ini akan mengiterasi setiap elemen dalam array alat untuk mencari alat dengan ID yang sesuai.
+Perbandingan ID: Di dalam loop, ID alat yang sedang diperiksa dibandingkan dengan nilai id yang diberikan sebagai parameter. Jika kedua ID sama, maka alat tersebut telah ditemukan.
 
+2. Menampilkan Informasi Alat
+Jika Alat Ditemukan: Setelah alat ditemukan, informasi lengkap tentang alat tersebut akan ditampilkan ke pengguna. Hal ini berguna untuk memverifikasi bahwa pengguna sedang mengedit alat yang benar.
+
+3. Memilih Data yang Ingin Diedit
+Menu Pilihan: Pengguna diberikan beberapa pilihan untuk menentukan data mana yang ingin diedit mulai dari nama, merek, model, tahun produksi, jumlah unit serta  jumlah tersedia . Pilihan pengguna akan disimpan dalam variabel choice.
+
+4. Mengubah Data Alat
+switch-case: Berdasarkan nilai choice yang dipilih pengguna, program akan menjalankan blok kode yang sesuai.
+Case 1 (edit nama) : Memperbaharui nama alat
+Case 2 (edit merek) : Memperbaharui merek alat 
+Case 3 (edit model) : Memperbarui model alat.
+Case 4 ( edit tahun produksi) : Memperbarui tahun produksi 
+Case 5 (edit jumlah unit ) : Memperbarui jumlah unit sekaligus Mengupdate jumlah tersedia .
+Case 6 (edit jumlah tersedia) : Memperbarui jumlah tersedia.
+
+5. Menampilkan Pesan Konfirmasi
+Setelah Perubahan: Setelah data berhasil diubah, program akan menampilkan pesan konfirmasi kepada pengguna.
+
+6. Menangani Kasus Alat Tidak Ditemukan
+Jika Tidak Ditemukan: Jika setelah melakukan pencarian seluruh array, alat dengan ID yang diberikan tidak ditemukan, maka program akan menampilkan pesan kesalahan.
+
+-> cara kerja fungsi user menu
+1. Menampilkan Menu:
+Fungsi ini akan menampilkan menu interaktif di layar, memberikan beberapa pilihan kepada pengguna.
+Pilihan-pilihan yang tersedia adalah:
+- Lihat Alat: Menampilkan daftar semua alat yang tersedia beserta detailnya.
+- Pinjam Alat: Memungkinkan pengguna untuk memilih alat yang ingin dipinjam dan melakukan proses peminjaman.
+- Lihat Pinjaman: Menampilkan riwayat peminjaman yang telah dilakukan oleh pengguna.
+- Kembalikan Alat: Memungkinkan pengguna untuk mengembalikan alat yang telah dipinjam.
+- Keluar: Mengakhiri sesi pengguna.
+
+2. Menerima Input Pengguna:
+Program akan meminta pengguna untuk memilih salah satu opsi dari menu yang ditampilkan.
+Pilihan pengguna akan disimpan dalam variabel choice.
+
+3. Memproses Pilihan Pengguna:
+Menggunakan struktur switch-case, program akan mengevaluasi nilai choice dan menjalankan fungsi yang sesuai.
+- Case 1 (Lihat Alat): Memanggil fungsi LihatAlat untuk menampilkan daftar alat.
+- Case 2 (Pinjam Alat): Memanggil fungsi pinjamAlat untuk memproses permintaan peminjaman. Fungsi ini akan memeriksa ketersediaan alat, menambahkan data peminjaman ke dalam array pinjaman, dan mungkin juga mengurangi jumlah alat yang tersedia.
+- Case 3 (Lihat Pinjaman): Memanggil fungsi lihatPinjaman untuk menampilkan daftar semua peminjaman yang telah dilakukan oleh pengguna saat ini.
+- Case 4 (Kembalikan Alat): Memanggil fungsi kembalikanAlat untuk memproses pengembalian alat. Fungsi ini akan menghapus data peminjaman dari array pinjaman dan mungkin juga meningkatkan jumlah alat yang tersedia.
+- case 5 : Keluar dari menu user.
+- Default: Menampilkan pesan kesalahan jika pengguna memilih opsi yang tidak valid.
+
+4. Mengulang Menu:
+   Struktur do-while memastikan bahwa menu akan terus ditampilkan selama pengguna belum memilih opsi untuk keluar.
+   
+-> cara kerja fungsi lihat pinjaman:
+1. Menampilkan Judul:
+Fungsi ini akan mencetak judul yang menunjukkan daftar pinjaman untuk pengguna tertentu.
+
+2. Melakukan Pencarian:
+Fungsi ini akan melakukan dua kali perulangan bersarang:
+- Perulangan pertama: Melakukan iterasi pada array pinjaman untuk mencari data peminjaman yang sesuai dengan username yang diberikan.
+- Perulangan kedua: Jika ditemukan data peminjaman yang sesuai, fungsi ini akan mencari data alat yang sesuai dengan ID alat yang tercatat dalam data peminjaman.
+
+3. Menampilkan Hasil:
+Jika ditemukan data peminjaman yang sesuai, fungsi ini akan menampilkan detail alat yang dipinjam, termasuk ID alat, nama alat, merek, model, tahun produksi, dan jumlah yang tersedia.
+Jika tidak ditemukan data peminjaman untuk pengguna tersebut, akan ditampilkan pesan bahwa tidak ada pinjaman yang ditemukan.
+
+-> cara kerja fungsi muat akun:
+1.	Membuka File : Fungsi ini dimulai dengan mencoba membuka file bernama "akun.txt" dalam mode baca ( "r"). Jika file tidak ditemukan, program akan menampilkan pesan kesalahan dan keluar dari program menggunakan exit(1).	
+2. 	Inisialisasi Jumlah Akun : Variabel jumlahAkundiinisialisasi dengan nilai 0. Ini digunakan untuk menghitung jumlah akun yang berhasil dibaca dari file.
+3.	Membaca Data Akun : Fungsi menggunakan loop whileuntuk membaca data dari file. Dengan menggunakan fscanf, fungsi ini membaca tiga string (username, password, dan role) untuk setiap akun yang ada di file. Data ini disimpan dalam struktur array Akunyang diberikan sebagai parameter.
+4. 	Menghitung Jumlah Akun : Setiap kali data akun berhasil dibaca, nilai jumlahAkunakan ditingkatkan satu. Ini dilakukan dengan menggunakan (*jumlahAkun)++, yang berarti nilai yang ditunjuk oleh jumlahAkunakan bertambah satu.
+5. 	Menutup File : Setelah semua data akun dibaca, file ditutup dengan fclose(file)untuk membebaskan sumber daya yang digunakan oleh file
+
+-> cara kerja fungsi muat alat:
+1. Membuka File: Fungsi mencoba membuka file alat.txt dalam mode baca ("r").Jika file tidak dapat dibuka (misalnya, file tidak ada), program akan mencetak pesan kesalahan dan keluar dengan exit(1).
+2. Inisialisasi Jumlah Alat: Variabel jumlahAlat diinisialisasi dengan 0. Ini digunakan untuk menghitung jumlah alat yang berhasil dibaca dari file.
+3. Membaca Data Alat: Fungsi menggunakan fscanf dalam loop while untuk membaca data dari file. Format yang digunakan adalah:
+•	%u untuk id, tahunProduksi, jumlahUnit, dan jumlahTersedia (tipe unsigned int).
+•	%s untuk nama, merek, dan model (string).
+Data yang dibaca disimpan dalam elemen array alat yang sesuai dengan indeks *jumlahAlat.
+4. Menghitung Jumlah Alat: Setiap kali data alat berhasil dibaca, nilai jumlahAlat akan ditingkatkan satu dengan (*jumlahAlat)++.
+5. Menutup File:Setelah selesai membaca semua data, file ditutup dengan fclose(file).
+6. Pemeriksaan jumlah alat: setelah menutup file, fungsi memeriksa apakah jumlahAlat masih 0. Jika iya, maka program akan mencetak pesan
+   bahwa tidak ada alat yang ditemukan dalam file.
+
+-> cara kerja fungsi lihat alat:
+1. Menampilkan Judul: Fungsi dimulai dengan mencetak judul "Daftar Alat Laboratorium:" untuk memberi tahu pengguna bahwa daftar alat akan ditampilkan.
+2. Pemeriksaan Jumlah Alat: Fungsi memeriksa apakah jumlahAlat sama dengan 0. Jika iya, maka akan mencetak pesan "Tidak ada alat yang tersedia." untuk memberi tahu pengguna bahwa tidak ada alat yang dapat ditampilkan.
+3. Menampilkan Daftar Alat: Jika ada alat yang tersedia (jumlahAlat > 0), fungsi akan menggunakan loop for untuk iterasi melalui setiap alat dalam array alat.
+
+-> cara kerja fungsi pinjam alat:
+Fungsi ini digunakan untuk meminjam alat dengan ID tertentu.
+- Pertama-tama fungsi ini akan memeriksa apakah alat dengan ID yang diberikan (id) ada dalam daftar alat (alat[]).
+- Jika ID alat ditemukan, kemudian diperiksa apakah jumlah alat yang tersedia lebih besar dari 0 (alat[i].jumlahTersedia > 0). Jika alat tersedia, maka akan dilakukan proses peminjaman jumlah alat yang tersedia dengan dikurangi satu (alat[i].jumlahTersedia--).
+- Informasi peminjaman akan ditambahkan ke dalam array pinjaman[], termasuk idAlat dan username yang meminjam alat tersebut.
+- Jumlah pinjaman yang tercatat juga akan bertambah ((*jumlahPinjaman)++).
+- Setelah peminjaman berhasil, fungsi SimpanPinjaman akan dipanggil untuk menyimpan data pinjaman ke dalam file pinjaman.txt.
+- Fungsi akan memberi feedback ke pengguna apakah peminjaman berhasil atau tidak, dan program akan berakhir. Akan tetapi, jika Alat Tidak Tersedia, maka akan ditampilkan "Alat tidak tersedia untuk dipinjam." dan program akan berakhir.
+-Jika ID alat tidak ditemukan dalam daftar alat, maka akan ditampilkan  "Alat dengan ID ... tidak ditemukan."
+
+-> cara kerja fungsi data pinjaman:
+Fungsi ini digunakan untuk memuat (membaca) data pinjaman dari file pinjaman.txt ke dalam array pinjaman[].
+- Fungsi ini akan membuka file pinjaman.txt dibuka dalam mode 'r' (read/baca).
+- Jika file gagal dibuka, maka pesan kesalahan akan ditampilkan dan program akan berhenti.
+- Jika file berhasil dibuka, maka fungsi selanjutnya digunakan untuk membaca ID alat dan nama pengguna dari file.
+- Pembacaan berlanjut hingga mencapai EOF (end of file/akhir dari file).
+- Kemudian setiap kali data baru dibaca, ((*jumlahPinjaman)++) menambahkan jumlah pinjaman yang tercatat.
+- Setelah selesai membaca, file ditutup dengan fclose(file).
+
+-> cara kerja fungsi simpan pinjaman:
+  Fungsi ini digunakan untuk menyimpan data pinjaman ke dalam file pinjaman.txt.
+  - Pertama-tama file pinjaman.txt dibuka dengan mode 'w' (write/tulis).
+  - Jika file gagal dibuka, pesan kesalahan akan ditampilkan dan program akan berhenti.
+  - Kemudian fungsi ini akan menulis setiap pinjaman ke dalam file menggunakan fprintf(file, "%d %s\n", pinjaman[i].idAlat,     
+    pinjaman[i].username).
+  - Data yang ditulis adalah ID alat yang dipinjam dan nama pengguna yang meminjam, dan setiap entri dipisahkan oleh baris baru (\n).
+  - Setelah selesai menulis, file ditutup dengan fclose(file).
+
+-> cara kerja fungsi kembalikan alat:
+1. Mencari Data Peminjaman:
+Fungsi akan melakukan perulangan untuk memeriksa setiap data peminjaman.
+Data peminjaman yang dicari harus memenuhi dua kondisi:
+- ID alat pada data peminjaman harus sama dengan id yang diberikan.
+- Username pada data peminjaman harus sama dengan username yang diberikan.
+Jika ditemukan data peminjaman yang sesuai, proses penghapusan akan dilakukan.
+
+2. Menghapus Data Peminjaman:
+- Geser data: Ketika data yang ingin dihapus ditemukan, data-data di belakangnya akan digeser ke depan satu indeks. Hal ini dilakukan 
+  dengan perulangan for yang dimulai dari indeks data yang akan dihapus hingga indeks sebelum elemen terakhir.
+- Kurangi jumlah peminjaman: Nilai *jumlahPinjaman dikurangi 1 untuk menunjukkan bahwa jumlah data peminjaman telah berkurang.
+- Beri pesan sukses: Sistem akan menampilkan pesan "Pengembalian alat berhasil."
+
+3. Tidak Ditemukan:
+Jika setelah melakukan pencarian tidak ditemukan data peminjaman yang sesuai, sistem akan menampilkan pesan "Peminjaman tidak ditemukan atau ID tidak cocok."
+
+
+-> kegunaan program main.c
+kagunaan program sistem peminjaman alat laboratorium:
+- proses peminjaman dan pengembalian alat lab menjadi lebih cepat dan mudah.
+- Data tentang alat dan peminjaman alat lab selalu terupdate dan akurat.
+- Sistem dapat mencatat riwayat pengunaan alat lab, sehingga jika terjadi kerusakan, dapat diketahui siapa pengguna terakhirnya. 
+- Pengguna dalat melihat secara real time ketersediaan alat lab yang ingin dipinjam.
+- Dengan adanya sistem peminjaman alat lab, setiap alat yang dipinjam akan tercatat sehingga memudahkan dalam melacak keberadaan alat.
 
 -> Cara Kerja Main.c
 Program ini adalah sistem manajemen laboratorium yang memungkinkan pengguna untuk login dan mengakses menu sesuai peran mereka:
@@ -177,3 +319,36 @@ User dapat:
 2.Meminjam alat.
 3.Mengembalikan alat.
 4.Melihat riwayat peminjaman.
+
+
+
+=> kegunaan program kosa kata.c
+program ini bertujuan untuk menyusun sebuah kosa kata dari sebuh teks yang terdapat dalam file input (dalam hal ini ada lirik lagu bahasa inggris) dengan adanya program ini memudahkan user untuk melihat kata demi kata yang telah dipisahkan ke dalam sebuh file output dengan format tertentu serta tidak ada kosa kata yan sama dicetak berulang kali.
+
+-> cara kerja kosa-kata.c
+1. Header
+Header <studio.h> adalah salah satu header file standar dalam bahasa pemrograman C yang menyediakan fungsi-fungsi untuk melakukan input dan output (I/O).
+Header <stdlib.h> adalah salah satu header file standar dalam bahasa pemrograman C yang menyediakan berbagai fungsi untuk melakukan operasi umum, seperti pengelolaan memori, konversi tipe data, dan kontrol program. 
+Header <string.h> adalah header file standar dalam bahasa pemrograman C yang menyediakan fungsi-fungsi untuk memanipulasi string (array karakter) dan operasi terkait. 
+Header <cytype.h> adalah header file standar dalam bahasa pemrograman C yang menyediakan fungsi-fungsi untuk menguji dan mengonversi karakter.
+
+2. Define 
+Disini terdapat dua define atau pendefinisian :
+•	Define MAX_WORD 1000 menandakan kita akan membatasi hanya ada 1000 kata untuk array dalam program
+•	Define MAX_WORD_LEGHT menandakan kita akan membatasi panjang sebuah kata denagn nilai 100
+
+3. Fungsi mengubah string menjadi huruf kecil
+Fungsi ini menggunakan perulangan for dimana setiap karakter akan diperiksa satu persatu dan mengubahnya menjadi huruf kecil  hingga akhir dari string
+	
+4. Fungsi Untuk Menghapus tanda baca dari kata 
+Fungsi ini menggunakan perulangan for untuk mememriksa apakah karakter tersebut adalah huruf atau bukan, jika karakter tersebut adalah huruf maka akan dimasukkan kedalam variabel word dan terus memeriksa hingga akhir string. Namun jika ada karakter yang bukan huruf maka kita akan memastikan karakter tersebut yg dikecualikan dengan cara jika karakter tersebut adalah tanda penghubung, apostrof, dan titik (-,’,.) dan huruf setelahnya adalah sebuah huruf maka karakter tersebut akan dimasukkan juga kedalam variabel word.
+
+5. Fungsi Utama
+•	Membuka file “lirik.txt” untuk dibaca, jika file tidak ada maka akan keluar peringatan eror
+•	Membaca judul dari file, if disisni mencoba untuk membaca satu baris dari file yg sudah dibuka sebelumnya (lirik.txt), “fgets” digunakan untuk membaca teks dari file dan akan menyimpan baris yang dibaca ke dalam variabel line, “sizeof(line)” memberi tau fungsi “fgets” sberapa banyak ruang yang tersedia dalam variable line untuk menyimpan teks, jika tidak ada lagi baris yang bisa dibaca maka akan mengembalikan NULL
+•	Membuka file output (kosa_kata.word) untuk ditulis, jika terjadi kesalahan saat membuka file maka akan keluar peringatan eror dan langsung menutup file itu, namun jika file berhasil dibuka maka isi dari variable line akan di print ke fli output tersebut
+•	Membaca setiap baris lirik, while disini mencoba untuk membaca satu baris dari file yg sudah dibuka sebelumnya (lirik.txt), “fgets” digunakan untuk membaca teks dari file dan akan menyimpan baris yang dibaca ke dalam variabel line, “sizeof(line)” memberi tau fungsi “fgets” sberapa banyak ruang yang tersedia dalam variable line untuk menyimpan teks, jika tidak ada lagi baris yang bisa dibaca maka akan mengembalikan NULL, lalu string didalam variable line dipecah menjadi per kata menggunakan fungsi “strtok” dengan spasi dan new line sebagai penandanya dan kata yang sudah terpecah disimpan dalam variabel kata 
+•	Memeriksa apakah di dalam variabel kata ada isinya, jika iya maka string di dalam variabel kata akan di copy ke dalam variabel cleanedWord, lalu seluruh string di didalam cleanedWord ini akan menjalankan fungsi mengecilkan seluruh karakter dan memastikan karakter tersebut adalah sebuah huruf dan tanda baca yang dikecualikan.
+•	Memeriksa apakah kata sudah ada dalam daftar, perulangan for digunakan untuk memeriksa perkata apakah kata di dalam variabel cleanedWord ada di dalam variabel words, jika sudah ada maka kata tersebut tidak dieksekusi lagi, fungsi ini digunakan untuk mencegah mencetak kata kata yang sama dua kali, namun jka kata tersebut belum berada di dalam variabel words maka akan di tambahkan kedalam d…
+
+
